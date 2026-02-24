@@ -40,8 +40,8 @@ The frontend is deployed using **GitHub Pages**.
 
 📂 Project Directory
 
-├── index.html        # Entry point / Authentication view
-├── register.html     # User onboarding view
-├── dashboard.html    # Protected data management view
-├── script.js         # Core application logic and API interfacing
-└── style.css         # Global stylesheet
+-index.html        # Entry point / Authentication view
+-register.html     # User onboarding view
+-dashboard.html    # Protected data management view
+-script.js         # Core application logic and API interfacing
+-style.css         # Global stylesheet
