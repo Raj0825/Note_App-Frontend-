@@ -34,7 +34,8 @@
     // 1. Authentication Check
     const token = localStorage.getItem('authToken');
     if (!token) {
-        window.location.href = '/login.html'; // Kick out unauthenticated users
+        // 🚨 GitHub Pages safe redirect (assuming index.html is your login page)
+        window.location.href = 'index.html'; 
     }
 
     // Optional: Greet the user
@@ -46,14 +47,14 @@
     // 2. Fetch Notes Function
     async function loadNotes() {
         try {
-            const response = await fetch('/notes', {
-                headers: { 'Authorization': token } // Attaching the token!
+            // 🚨 UPDATE: Point to live Render URL
+            const response = await fetch('https://note-app-1-tnpi.onrender.com/notes', {
+                headers: { 'Authorization': token } 
             });
             if (response.ok) {
                 const notes = await response.json();
                 displayNotes(notes);
             } else if (response.status === 401) {
-                // Token is invalid or expired
                 logout();
             }
         } catch (error) {
@@ -61,14 +62,17 @@
         }
     }
 
-   // 3. Display Notes Function (Updated with Delete Button)
+   // 3. Display Notes Function 
     function displayNotes(notes) {
         const grid = document.getElementById('notesGrid');
-        grid.innerHTML = ''; // Clear current notes
+        
+        // Check if the element exists to prevent errors
+        if (!grid) return; 
+        
+        grid.innerHTML = ''; 
         notes.forEach(note => {
             const card = document.createElement('div');
             card.className = 'note-card';
-            // Notice the new delete button at the bottom!
             card.innerHTML = `
                 <h3>${note.title}</h3>
                 <p>${note.content}</p>
@@ -80,19 +84,19 @@
 
     // New Function: Delete Note
     async function deleteNote(noteId) {
-        // Add a quick confirmation popup so users don't delete by accident
         if (!confirm("Are you sure you want to delete this note?")) {
             return;
         }
 
         try {
-            const response = await fetch(`/notes/${noteId}`, {
+            // 🚨 UPDATE: Point to live Render URL (Note the backticks ` for the variable)
+            const response = await fetch(`https://note-app-1-tnpi.onrender.com/notes/${noteId}`, {
                 method: 'DELETE',
-                headers: { 'Authorization': token } // Send the token!
+                headers: { 'Authorization': token } 
             });
 
             if (response.ok) {
-                loadNotes(); // Reload the notes grid so the deleted note vanishes
+                loadNotes(); 
             } else {
                 alert("Failed to delete note.");
             }
@@ -108,18 +112,19 @@
         const content = document.getElementById('noteContent').value;
 
         try {
-            const response = await fetch('/notes', {
+            // 🚨 UPDATE: Point to live Render URL
+            const response = await fetch('https://note-app-1-tnpi.onrender.com/notes', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': token // Attaching the token!
+                    'Authorization': token 
                 },
                 body: JSON.stringify({ title, content })
             });
 
             if (response.ok) {
-                document.getElementById('noteForm').reset(); // Clear the form
-                loadNotes(); // Reload the list to show the new note
+                document.getElementById('noteForm').reset(); 
+                loadNotes(); 
             }
         } catch (error) {
             console.error("Failed to save note", error);
@@ -130,13 +135,17 @@
     function logout() {
         localStorage.removeItem('authToken');
         localStorage.removeItem('userEmail');
-        window.location.href = '/';
+        // 🚨 GitHub Pages safe redirect
+        window.location.href = 'index.html';
     }
 
-    document.getElementById('logoutBtn').addEventListener('click', logout);
+    if (document.getElementById('logoutBtn')) {
+        document.getElementById('logoutBtn').addEventListener('click', logout);
+    }
 
     // Initial load
     loadNotes();
 </script>
 </body>
+
 </html>
