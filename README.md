@@ -33,15 +33,5 @@ It provides a simple, responsive interface for users to manage notes and communi
 
 ---
 
-## 🌐 Live Deployment
-
-The frontend is deployed using **GitHub Pages**.
 
 
-📂 Project Directory
-
--index.html        # Entry point / Authentication view
--register.html     # User onboarding view
--dashboard.html    # Protected data management view
--script.js         # Core application logic and API interfacing
--style.css         # Global stylesheet
