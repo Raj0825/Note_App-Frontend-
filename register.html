@@ -42,8 +42,8 @@
         const msgEl = document.getElementById('regMessage');
 
         try {
-            // Hitting your public Spring Boot endpoint
-            const response = await fetch('/auth/register', {
+            // 🚨 Pointing directly to the live Render backend
+            const response = await fetch('https://note-app-1-tnpi.onrender.com/auth/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, email, password })
@@ -52,7 +52,9 @@
             if (response.ok) {
                 msgEl.textContent = 'Account created successfully!';
                 msgEl.style.color = '#4caf50';
-                setTimeout(() => window.location.href = '/', 1500);
+                
+                // 🚨 Safe redirect for GitHub Pages
+                setTimeout(() => window.location.href = 'index.html', 1500);
             } else {
                 msgEl.textContent = 'Registration failed. Email might be in use.';
                 msgEl.style.color = '#d32f2f';
@@ -65,3 +67,4 @@
 </script>
 </body>
 </html>
+
