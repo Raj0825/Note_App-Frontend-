@@ -10,7 +10,6 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     const authHeader = `Basic ${credentials}`;
 
     try {
-        // 2. 🚨 UPDATE: Point directly to the live Render backend 🚨
         const response = await fetch('https://note-app-1-tnpi.onrender.com/notes', {
             method: 'GET',
             headers: {
@@ -27,9 +26,9 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
             localStorage.setItem('authToken', authHeader);
             localStorage.setItem('userEmail', email);
 
-            // Redirect to dashboard (This stays the same, it navigates your frontend pages)
+            // 🚨 THE FIX: Removed the forward slash!
             setTimeout(() => {
-                window.location.href = '/dashboard.html'; 
+                window.location.href = 'dashboard.html'; 
             }, 1000);
         } else {
             messageEl.textContent = 'Invalid email or password';
