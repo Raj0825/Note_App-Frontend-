@@ -72,18 +72,19 @@
         notes.forEach(note => {
             const card = document.createElement('div');
             card.className = 'note-card';
+            
+            // 🚨 UPDATED: Added Flexbox and "width: auto" to fix the buttons
             card.innerHTML = `
                 <h3>${note.title}</h3>
                 <p>${note.content}</p>
-                <div style="margin-top: 15px;">
-                    <button class="btn" onclick="startEdit(${note.id})" style="background-color: #ff9800; margin-right: 10px;">Edit</button>
-                    <button class="btn delete-btn" onclick="deleteNote(${note.id})">Delete</button>
+                <div style="display: flex; justify-content: space-between; margin-top: 15px;">
+                    <button class="btn" onclick="startEdit(${note.id})" style="background-color: #ff9800; width: auto; padding: 6px 16px; margin: 0;">Edit</button>
+                    <button class="btn delete-btn" onclick="deleteNote(${note.id})" style="width: auto; padding: 6px 16px; margin: 0;">Delete</button>
                 </div>
             `;
             grid.appendChild(card);
         });
     }
-
     // 🚨 NEW: Start Editing Function
     function startEdit(id) {
         const noteToEdit = allNotes.find(note => note.id === id);
@@ -176,4 +177,5 @@
 </body>
 
 </html>
+
 
